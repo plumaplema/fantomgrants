@@ -28,7 +28,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/CreateEvent"
+    "src/components/CreateEvent",
+    "../thetagrant/src/components/Navbar.tsx"
   ],
   "exclude": [
     "node_modules"

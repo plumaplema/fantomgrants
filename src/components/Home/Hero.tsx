@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 // Here we have used react-icons package for the icons
 import { GoChevronRight } from 'react-icons/go';
-import quadrathetagrant from '../../pages/assets/thetagrant.png';
+import quadrathetagrant from '../../pages/assets/fantomposter.png';
 import { MdBolt } from 'react-icons/md';
 import { useRouter } from 'next/router';
 
@@ -47,7 +47,7 @@ const HeroSection = () => {
                         </HStack>
                     </HStack>
                     <chakra.h1 fontSize="5xl" lineHeight={1} fontWeight="bold" textAlign="left">
-                        Quadra Theta <br />
+                        Fantom <br />
                         <chakra.span color="teal">Grants</chakra.span>
                     </chakra.h1>
                     <Text
@@ -57,7 +57,7 @@ const HeroSection = () => {
                         fontWeight="400"
                         color="gray.500"
                     >
-                        Quadra Theta Grants is a Funding Application that utilizes Quadratic Funding to prioritize projects supported by the community.
+                        Unlocking innovation with quadratic funding on Fantom blockchain, empowering developers and accelerating project growth.
                     </Text>
                     <HStack
                         spacing={{ base: 0, sm: 2 }}

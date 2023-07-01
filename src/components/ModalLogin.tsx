@@ -1,8 +1,7 @@
 import { Button, Flex, VStack, Image, Heading, Modal, ModalOverlay, ModalContent, useToast, ModalHeader, ModalCloseButton, ModalBody, Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/react";
-import logo from '../pages/assets/quadratetalogo.png';
+import logo from '../pages/assets/Fantom.png';
 import { useConnect } from "wagmi";
 import { useState } from "react";
-import walleticon from '../pages/assets/walleticon.png';
 import metamaskicon from '../pages/assets/metamask.png';
 
 export default function ModalLoginPage(modalData: {
@@ -61,7 +60,7 @@ export default function ModalLoginPage(modalData: {
                                             disabled={!connector.ready}
                                             key={connector.id}
                                             variant={'outline'}
-                                            leftIcon={(connector.name != 'MetaMask') ? <Image src={walleticon.src} h={'30px'} /> : <Image src={metamaskicon.src} h={'30px'} />}
+                                            leftIcon={(connector.name != 'MetaMask') ? <Image src={metamaskicon.src} h={'30px'} /> : <Image src={metamaskicon.src} h={'30px'} />}
                                             onClick={async () => {
                                                 setLoading(true)
                                                 connect({ connector })

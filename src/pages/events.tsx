@@ -127,6 +127,9 @@ export const getServerSideProps = async () => {
                 gt: parseInt((currentTime / 1000).toFixed(0))
             },
         },
+        orderBy: [{
+            duration: 'asc'
+        }]
     })
     const expired = await prisma.events.findMany({
         where: {

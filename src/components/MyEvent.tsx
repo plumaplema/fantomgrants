@@ -112,7 +112,7 @@ export default function MyEvents({ value }: { value: Events }) {
                             >
                                 This event requires you to distribute the funds
                             </Text>) :
-                            (<Text
+                            (expired && <Text
                                 fontWeight="medium"
                                 fontSize="xs"
                                 color={'green.500'}

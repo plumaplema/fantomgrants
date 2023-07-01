@@ -18,7 +18,6 @@ import { Events } from '@prisma/client';
 
 export default function EventCategory({ value }: { value: Events }) {
     const { description, duration, fundingpool, id, name, organization, nftsecurity } = value
-    console.log(value)
     var currentTime = Date.now();
     const expired = duration * 1000 > currentTime
     return (
@@ -54,7 +53,7 @@ export default function EventCategory({ value }: { value: Events }) {
                     <Text
                         fontWeight="medium"
                         fontSize="xs"
-                        color={nftsecurity ? 'green.800' : 'red.800'}
+                        color={nftsecurity ? 'green.500' : 'red.800'}
                     >
                         NFT WhiteListing: {nftsecurity ? 'Enabled' : 'Disabled'}
                     </Text>
@@ -81,8 +80,6 @@ export default function EventCategory({ value }: { value: Events }) {
                     justifySelf="flex-end"
                     alignItems="center"
                 >
-                    {expired && <Label label={"Donate"} />}
-                    <Label label={"Contributors"} />
                     <Link
                         href={`/events/${id}`}>
                         <Label label={"View"} />

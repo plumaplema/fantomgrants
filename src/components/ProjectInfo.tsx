@@ -1,6 +1,6 @@
 import { Button, List, ListIcon, ListItem, SimpleGrid, Stack, VStack, chakra, Text, useDisclosure } from '@chakra-ui/react';
 import { Projects } from '@prisma/client';
-import { AiFillAlert } from 'react-icons/ai';
+import { AiOutlineCheckSquare } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
 import { FaRegComment } from 'react-icons/fa';
 import { GoHistory } from 'react-icons/go';
@@ -41,10 +41,10 @@ function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, proj
         ],
         onSettled(data, error) {
             if (data) {
-                const data_ = data as [BigNumber, BigNumber]
+                const data_ = data as [BigNumber | null, BigNumber | null]
                 setData({
-                    projectFund: parseFloat(ethers.utils.formatEther(data_[0])),
-                    eventFund: parseFloat(ethers.utils.formatEther(data_[1]))
+                    projectFund: parseFloat(ethers.utils.formatEther(data_[0] ? data_[0] : BigNumber.from(0))),
+                    eventFund: parseFloat(ethers.utils.formatEther(data_[1] ? data_[1] : BigNumber.from(0)))
                 })
             }
         },
@@ -52,7 +52,7 @@ function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, proj
 
     return (
         <Stack pos="relative" zIndex={1} direction="column" spacing={5} textAlign="left">
-            <DonateToProject projectMatchrefetch={req.refetch} res={res} refetch={refetch} isOpen={projectDonate.isOpen} onClose={projectDonate.onClose} id='' />
+            <DonateToProject tax={projectData.currentTax} projectMatchrefetch={req.refetch} res={res} refetch={refetch} isOpen={projectDonate.isOpen} onClose={projectDonate.onClose} id='' />
             <VStack>
                 <chakra.h1 fontSize="4xl" lineHeight={1} fontWeight="bold">
                     {res?.projectTitle}
@@ -70,7 +70,7 @@ function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, proj
             <List>
                 <SimpleGrid columns={[1, 2]}>
                     <ListItem>
-                        <ListIcon as={AiFillAlert} color="green.400" />
+                        <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                         <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                             Current Tax :&nbsp;
                         </Text>
@@ -79,7 +79,7 @@ function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, proj
                         </Text>
                     </ListItem>
                     <ListItem>
-                        <ListIcon as={AiFillAlert} color="green.400" />
+                        <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                         <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                             Funding Recieve :&nbsp;
                         </Text>
@@ -88,7 +88,7 @@ function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, proj
                         </Text>
                     </ListItem>
                     <ListItem>
-                        <ListIcon as={AiFillAlert} color="green.400" />
+                        <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                         <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                             Funding Pool Share :&nbsp;
                         </Text>
@@ -97,7 +97,7 @@ function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, proj
                         </Text>
                     </ListItem>
                     <ListItem>
-                        <ListIcon as={AiFillAlert} color="green.400" />
+                        <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                         <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                             Total Funds To Recieve :&nbsp;
                         </Text>

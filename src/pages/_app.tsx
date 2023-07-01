@@ -6,7 +6,7 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 import { BuildBear } from "../components/Helpers/CustomChain"
 import Head from "next/head"
-import logo from '../pages/assets/quadratetalogo.png'
+import logo from '../pages/assets/Fantom.png'
 
 const activeLabelStyles = {
   transform: "scale(0.85) translateY(-24px)"

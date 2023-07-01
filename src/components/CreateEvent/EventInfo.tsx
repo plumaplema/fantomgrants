@@ -49,7 +49,7 @@ export default function EventInfo() {
 
     const currentDate = new Date();
 
-    const currentPlusOneHour = new Date(currentDate.getTime() + 120 * 60 * 1000);
+    const currentPlusOneHour = new Date(currentDate.getTime() + 60 * 60 * 1000);
 
     const minDate = currentPlusOneHour.toISOString().slice(0, -8); // Remove the timezone offset from the ISO string
 

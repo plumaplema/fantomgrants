@@ -26,10 +26,10 @@ function VerifiedProposal({ event }: { event: Projects }) {
         ],
         onSettled(data, error) {
             if (data) {
-                const data_ = data as [BigNumber, BigNumber]
+                const data_ = data as [BigNumber | null, BigNumber | null]
                 setData({
-                    projectFund: parseFloat(ethers.utils.formatEther(data_[0])),
-                    eventFund: parseFloat(ethers.utils.formatEther(data_[1]))
+                    projectFund: parseFloat(ethers.utils.formatEther(data_[0] ? data_[0] : BigNumber.from(0))),
+                    eventFund: parseFloat(ethers.utils.formatEther(data_[1] ? data_[1] : BigNumber.from(0)))
                 })
             }
         },

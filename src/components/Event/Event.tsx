@@ -11,13 +11,14 @@ import {
     ListItem,
     List,
     useDisclosure,
+    useToast,
 } from '@chakra-ui/react';
 import { BsEnvelopePaper, BsEye } from 'react-icons/bs';
 import { Events, Projects } from '@prisma/client';
 import { useState, useEffect } from 'react';
-import { useAccount, useContractRead } from 'wagmi';
+import { erc721ABI, useAccount, useContractRead } from 'wagmi';
 import { abi, contract_address } from '../Helpers/contract';
-import { AiFillAlert, AiFillStop } from 'react-icons/ai';
+import { AiOutlineCheckSquare } from 'react-icons/ai';
 import { BigNumber, ethers } from 'ethers';
 import { useEventStorage } from '../../../storage';
 import Countdown from 'react-countdown';
@@ -30,6 +31,8 @@ import ShowProjectsToUsers from '../ShowProjectsToUsers';
 
 const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Projects>, unverified: Array<Projects> }) => {
     const [eventId, seteventId] = useState<string>('0')
+
+    const toast = useToast()
 
     const { price } = useEventStorage()
 
@@ -58,6 +61,15 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
         enabled: router.isReady,
     })
 
+    const balanceNFT = useContractRead({
+        abi: erc721ABI,
+        address: data?.nftContract,
+        functionName: 'balanceOf',
+        args: [address ? address : contract_address],
+    })
+
+    const invalid = balanceNFT.data?.toNumber() == 0 || balanceNFT.data?.toNumber() == undefined
+    console.log(invalid)
     const { isOpen, onClose, onOpen } = useDisclosure()
 
     const openCreateProject = useDisclosure()
@@ -79,7 +91,7 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
             }
             <Donate refetch={refetch} isOpen={isOpen} onClose={onClose} id={eventId} />
             <CreateProject currentTax={data ? data.initialTax.toNumber() : 0} id={eventId} isOpen={openCreateProject.isOpen} onClose={openCreateProject.onClose} />
-            <Box justifyContent={'center'} maxW="fit-content" p={4} isolation="isolate" zIndex={3} mt="-10rem" marginInline="auto">
+            <Box justifyContent={'center'} maxWidth={'fit-content'} minWidth={['95%', '60%']} p={4} isolation="isolate" zIndex={3} mt="-10rem" marginInline="auto">
                 <Box
                     boxShadow={useColorModeValue(
                         '0 4px 6px rgba(160, 174, 192, 0.6)',
@@ -111,7 +123,7 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
                         <List>
                             <SimpleGrid columns={[1, 2]}>
                                 <ListItem>
-                                    <ListIcon as={AiFillAlert} color="green.400" />
+                                    <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                                     <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                                         Total Funding Pool :&nbsp;
                                     </Text>
@@ -120,7 +132,7 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
                                     </Text>
                                 </ListItem>
                                 <ListItem>
-                                    <ListIcon as={AiFillAlert} color="green.400" />
+                                    <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                                     <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                                         Amount in USD :&nbsp;
                                     </Text>
@@ -129,7 +141,7 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
                                     </Text>
                                 </ListItem>
                                 <ListItem>
-                                    <ListIcon as={AiFillAlert} color="green.400" />
+                                    <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                                     <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                                         Initial Tax :&nbsp;
                                     </Text>
@@ -138,7 +150,7 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
                                     </Text>
                                 </ListItem>
                                 <ListItem>
-                                    <ListIcon as={AiFillAlert} color="green.400" />
+                                    <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                                     <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                                         Tax Increment Rate :&nbsp;
                                     </Text>
@@ -147,7 +159,7 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
                                     </Text>
                                 </ListItem>
                                 <ListItem>
-                                    <ListIcon as={AiFillStop} color="green.400" />
+                                    <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                                     <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                                         Tax Capped :&nbsp;
                                     </Text>
@@ -156,7 +168,7 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
                                     </Text>
                                 </ListItem>
                                 <ListItem>
-                                    <ListIcon as={AiFillAlert} color="green.400" />
+                                    <ListIcon as={AiOutlineCheckSquare} color="green.400" />
                                     <Text display={'inline'} fontSize={'xs'} fontWeight={'bold'}>
                                         NFT Whitelisting :&nbsp;
                                     </Text>
@@ -197,7 +209,19 @@ const Event = ({ res, verified, unverified }: { res: Events, verified: Array<Pro
                                     <Button
                                         leftIcon={<BsEnvelopePaper />}
                                         rounded="md"
-                                        onClick={openCreateProject.onOpen}
+                                        onClick={() => {
+                                            if (nftsecurity) {
+                                                if (invalid) {
+                                                    toast({
+                                                        title: "Permission Denied",
+                                                        description: "You must own an NFT set by the event creator",
+                                                        status: 'error',
+                                                    })
+                                                    return
+                                                }
+                                            }
+                                            openCreateProject.onOpen()
+                                        }}
                                         color="white"
                                         variant="solid"
                                         isDisabled={expired}

@@ -43,7 +43,7 @@ function UnverfiedProposal({ project, refetch }: { project: Projects, refetch: (
                     })
                 } else {
                     toast({
-                        title: "Success Donating"
+                        title: "Success Verifying"
                     })
                 }
             } catch (error) {

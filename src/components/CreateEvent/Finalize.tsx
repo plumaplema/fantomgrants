@@ -1,6 +1,5 @@
 import { Center, Stack, Flex, Button, SimpleGrid, useToast } from '@chakra-ui/react';
 import { useEventIndex, useEventStorage } from '../../../storage';
-import { IconType } from 'react-icons';
 import { BigNumber, ethers } from 'ethers';
 import { useRouter } from 'next/router';
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction, useAccount } from 'wagmi';
@@ -9,12 +8,6 @@ import { useEffect, useState } from 'react';
 import { Events } from '@prisma/client';
 import ListFinalize from './Subcomponents/ListFinalize';
 import { generateRandomString } from '../Helpers/utils';
-
-interface ListItemInterface {
-    icon: IconType,
-    label: string,
-    item: string | number | undefined
-}
 
 export default function Finalize({ onClose }: { onClose: () => void }) {
     const [loading, setloading] = useState<boolean>(false)
@@ -27,7 +20,7 @@ export default function Finalize({ onClose }: { onClose: () => void }) {
         setId(randId)
     }, [])
 
-    const { name, organization, description, fundingpool, price, endTime, nftcontract, taxCapped, taxIncrementRate, taxRate } = useEventStorage()
+    const { name, nftsecurity, organization, description, fundingpool, price, endTime, nftcontract, taxCapped, taxIncrementRate, taxRate } = useEventStorage()
 
     const { setIndex } = useEventIndex()
 
@@ -54,7 +47,8 @@ export default function Finalize({ onClose }: { onClose: () => void }) {
         },
         onSuccess(data) {
             console.log(data)
-        }
+        },
+        enabled: Boolean(id)
     })
 
     const { writeAsync } = useContractWrite({
@@ -78,7 +72,7 @@ export default function Finalize({ onClose }: { onClose: () => void }) {
             const datas: Events = {
                 owner: address as string,
                 alreadyDistributed: false, description: description ? description : '', duration: endTime ? endTime : 100, fundingpool: fundingpool ? parseFloat(fundingpool as unknown as string) : 0,
-                id: id ? id : '', name: name ? name : '', nftsecurity: false, organization: organization ? organization : ''
+                id: id ? id : '', name: name ? name : '', nftsecurity: nftsecurity ? nftsecurity : false, organization: organization ? organization : ''
             }
             await fetch('/api/addevent', {
                 body: JSON.stringify(datas),
@@ -125,7 +119,7 @@ export default function Finalize({ onClose }: { onClose: () => void }) {
                     <ListFinalize />
                 </Stack>
                 <SimpleGrid mt={2} columns={[1]} spacing={2}>
-                    <Button isLoading={loading} loadingText={"Please Wait"} isDisabled={writeAsync ? false : true} onClick={async () => {
+                    <Button isLoading={loading} loadingText={"Please Wait"} isDisabled={!Boolean(writeAsync)} onClick={async () => {
                         setloading(true)
                         try {
                             console.log(1)

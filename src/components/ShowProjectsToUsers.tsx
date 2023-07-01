@@ -1,5 +1,4 @@
 import {
-    Box,
     Drawer,
     DrawerBody,
     DrawerCloseButton,
@@ -14,13 +13,12 @@ import {
     TableContainer,
     Tabs,
     Tbody,
-    Td,
     Th,
     Thead,
     Tr,
 } from "@chakra-ui/react";
 import { Projects } from "@prisma/client";
-import Link from "next/link";
+import VerifiedProposal from "./VerifiedProposal";
 
 type CreateProjectData = {
     projectTitle: string;
@@ -56,36 +54,15 @@ export default function ShowProjectsToUsers({
                                 <TableContainer>
                                     <Table size="lg">
                                         <Thead>
-                                            <Tr fontSize={'xs'} >
-                                                <Th>Project Title</Th>
-                                                <Th>Funds</Th>
-                                                <Th>Pool Shares</Th>
+                                            <Tr >
+                                                <Th fontSize={'xs'}>Project Title</Th>
+                                                <Th fontSize={'xs'}>Pool Shares</Th>
+                                                <Th fontSize={'xs'}>Pool Shares Rate</Th>
                                             </Tr>
                                         </Thead>
                                         <Tbody>
                                             {verified.map((event, index) => (
-                                                <Tr key={index}>
-                                                    <Link href={`/projects/${event.id}`}>
-                                                        <Td _hover={{
-                                                            color: 'blue.700'
-                                                        }} fontWeight={'bold'} fontSize="sm">{event.projectTitle}</Td>
-                                                    </Link>
-
-                                                    <Td fontSize="sm">{event.projectFunds}</Td>
-                                                    <Td>
-                                                        <Box
-                                                            w="100%"
-                                                            rounded="md"
-                                                        >
-                                                            <Box
-                                                                w={100}
-                                                                h={2}
-                                                                bg="blue.400"
-                                                                rounded="md"
-                                                            ></Box>
-                                                        </Box>
-                                                    </Td>
-                                                </Tr>
+                                                <VerifiedProposal key={index} event={event} />
                                             ))}
                                         </Tbody>
                                     </Table>

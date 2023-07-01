@@ -50,7 +50,7 @@ const Nav = () => {
                             <VisuallyHidden>Choc</VisuallyHidden>
                         </chakra.a>
                         <chakra.h1 color={'black'} fontSize="xl" fontWeight="medium" ml="2">
-                            Quadra Theta Grants
+                            Fantom Grants
                         </chakra.h1>
                     </Flex>
                     <HStack display="flex" alignItems="center" spacing={1}>

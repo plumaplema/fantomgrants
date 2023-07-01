@@ -119,16 +119,19 @@ export default function CreateProject({ isOpen, onClose, id, currentTax }: { cur
                     }
                 }));
             }
+            setloading(false)
         }
     })
 
     const onSubmit: SubmitHandler<CreateProjectData> = async (data) => {
+        setloading(true)
         try {
             console.log(writeAsync)
             await writeAsync?.()
         } catch (error) {
             console.log(error)
         }
+        setloading(false)
     };
 
     return (
@@ -209,7 +212,7 @@ export default function CreateProject({ isOpen, onClose, id, currentTax }: { cur
                             </FormControl>
                         </Stack>
                         <ModalFooter>
-                            <Button colorScheme="green" type="submit" variant="outline">
+                            <Button isLoading={loading} loadingText={"Please Wait"} colorScheme="green" type="submit" variant="outline">
                                 Submit Proposal
                             </Button>
                         </ModalFooter>

@@ -5,16 +5,6 @@ import Event from '../../components/Event/Event';
 import { PrismaClient } from '@prisma/client';
 import { InferGetServerSidePropsType } from 'next';
 
-interface DataType {
-    fundingPool: number,
-    duration: number,
-    index: string
-    initialTax: number,
-    taxCapped: number,
-    taxIncrementRate: number,
-    nftContract: `0x${string}`,
-    owner: `0x${string}`
-}
 
 const prisma = new PrismaClient();
 
