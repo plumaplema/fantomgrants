@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Projects {
+  id                 String  @id @unique
+  projectTitle       String
+  projectDescription String
+  name               String
+  projectLink        String
+  projectFunds       Int
+  currentTax         Int
+  owner              String
+  verified           Boolean
+  event              Events  @relation(fields: [eventsId], references: [id])
+  eventsId           String
+}
+
+model Events {
+  id                 String     @id @unique
+  name               String
+  organization       String
+  description        String
+  duration           Int
+  fundingpool        Int
+  nftsecurity        Boolean
+  alreadyDistributed Boolean    @default(true)
+  owner              String
+  Projects           Projects[]
+}

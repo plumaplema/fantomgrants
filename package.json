@@ -1,0 +1,52 @@
+{
+  "name": "theta-stream-supply",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.6.1",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@types/node": "18.16.0",
+    "@types/react": "18.0.38",
+    "@types/react-dom": "18.0.11",
+    "@types/react-table": "^7.7.14",
+    "@types/video.js": "^7.3.51",
+    "eslint": "8.39.0",
+    "eslint-config-next": "13.3.1",
+    "ethers": "^5",
+    "framer-motion": "^10.12.16",
+    "googleapis": "^118.0.0",
+    "immer": "^10.0.1",
+    "lottie-react": "^2.4.0",
+    "next": "13.3.1",
+    "react": "18.2.0",
+    "react-countdown": "^2.3.5",
+    "react-dom": "18.2.0",
+    "react-google-charts": "^4.0.0",
+    "react-hook-form": "^7.43.9",
+    "react-icons": "^4.8.0",
+    "react-particles": "^2.9.3",
+    "react-table": "^7.8.0",
+    "swr": "^2.1.5",
+    "tsparticles-engine": "^2.9.3",
+    "tsparticles-preset-snow": "^2.9.3",
+    "typescript": "5.0.4",
+    "usehooks-ts": "^2.9.1",
+    "video.js": "^8.3.0",
+    "wagmi": "^0.12.12",
+    "zustand": "^4.3.7"
+  },
+  "devDependencies": {
+    "@prisma/client": "^4.13.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.23",
+    "prisma": "^4.13.0",
+    "tailwindcss": "^3.3.1"
+  }
+}
