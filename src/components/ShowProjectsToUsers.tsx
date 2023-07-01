@@ -18,7 +18,6 @@ import {
     Th,
     Thead,
     Tr,
-    useColorModeValue,
 } from "@chakra-ui/react";
 import { Projects } from "@prisma/client";
 import Link from "next/link";
@@ -76,7 +75,6 @@ export default function ShowProjectsToUsers({
                                                     <Td>
                                                         <Box
                                                             w="100%"
-                                                            bg={useColorModeValue("gray.300", "gray.600")}
                                                             rounded="md"
                                                         >
                                                             <Box

@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = "mysql://doadmin:AVNS_PXAaFJigY0YQkewmHvO@db-mysql-nyc1-76973-do-user-12671768-0.b.db.ondigitalocean.com:25060/defaultdb"
 }
 
 model Projects {

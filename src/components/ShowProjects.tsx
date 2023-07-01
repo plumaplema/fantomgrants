@@ -71,7 +71,7 @@ export default function ShowProjects({
                                         </Thead>
                                         <Tbody>
                                             {verified.map((event, index) => (
-                                                <VerifiedProposal event={event} />
+                                                <VerifiedProposal key={index} event={event} />
                                             ))}
                                         </Tbody>
                                     </Table>

@@ -78,7 +78,7 @@ export default function Event({ expired, ongoing, price }: InferGetServerSidePro
                             {
                                 ongoing.map((value, key) => {
                                     return (
-                                        <React.Fragment>
+                                        <React.Fragment key={key}>
                                             <EventCategory value={value} key={key} />
                                             <Divider w={'95%'} />
                                         </React.Fragment>)
@@ -91,7 +91,7 @@ export default function Event({ expired, ongoing, price }: InferGetServerSidePro
                             {
                                 expired.map((value, key) => {
 
-                                    return (<React.Fragment>
+                                    return (<React.Fragment key={key}>
                                         <EventCategory value={value} key={key} />
                                         <Divider w={'95%'} />
                                     </React.Fragment>)
@@ -105,7 +105,7 @@ export default function Event({ expired, ongoing, price }: InferGetServerSidePro
                                 !isLoading &&
                                 msg.map((value, key) => {
 
-                                    return (<React.Fragment>
+                                    return (<React.Fragment key={key}>
                                         <MyEvents value={value} key={key} />
                                         <Divider w={'95%'} />
                                     </React.Fragment>)
