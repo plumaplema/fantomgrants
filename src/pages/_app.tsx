@@ -4,7 +4,7 @@ import React from 'react'
 import { Layout } from "../components/Layout/Layout"
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
-import { BuildBear } from "../components/Helpers/CustomChain"
+import { FantomFork } from "../components/Helpers/CustomChain"
 import Head from "next/head"
 import logo from '../pages/assets/Fantom.png'
 
@@ -55,7 +55,7 @@ const customTheme = extendTheme({
 
 
 export const { chains, provider } = configureChains(
-  [BuildBear],
+  [FantomFork],
   [publicProvider()]
 )
 

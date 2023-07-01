@@ -435,4 +435,4 @@ export const abi = [
 ] as const
 
 
-export const contract_address: `0x${string}` = '0x2fD716E238E5642ca915Ecd0C58C18332471Ab2E' as `0x${string}`
+export const contract_address: `0x${string}` = '0x6B67f4A4fd2aa0d4134450Ac522aF9d991E5FE15' as `0x${string}`
