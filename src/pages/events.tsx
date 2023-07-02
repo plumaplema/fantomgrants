@@ -25,7 +25,7 @@ import MyEvents from '@/components/MyEvent';
 
 const prisma = new PrismaClient();
 
-export default function Event({ expired, ongoing, price }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Event({ expired, ongoing }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const { address } = useAccount()
 
     const fetcher = (url: string, address: `0x${string}` | undefined) => fetch(url, {
@@ -46,10 +46,22 @@ export default function Event({ expired, ongoing, price }: InferGetServerSidePro
     const [myevents, setmyevents] = useState<{ success: boolean, msg: string }>({ msg: '', success: false })
 
     useEffect(() => {
-        setEventInformation({
-            price: parseFloat(price.price)
-        })
-    }, [])
+        const fetchData = async () => {
+            let price = { price: '0' };
+            try {
+                const res = await fetch('https://api.binance.com/api/v3/avgPrice?symbol=FTMUSDT');
+                const price_result = await res.json();
+                price = price_result;
+            } catch (error) {
+                console.error(error);
+            }
+            setEventInformation({
+                price: parseFloat(price.price)
+            });
+        };
+
+        fetchData();
+    }, []);
 
 
 
@@ -138,17 +150,7 @@ export const getServerSideProps = async () => {
             },
         },
     })
-    let price: { "price": string };
-    try {
-        const pricereq = await fetch('https://api.binance.com/api/v3/avgPrice?symbol=FTMUSDT')
-        const price_result: {
-            "price": string
-        } = await pricereq.json()
-        price = price_result
-    } catch (error) {
-        price = { price: '0' }
 
-    }
 
-    return { props: { ongoing, expired, price } }
+    return { props: { ongoing, expired } }
 }
