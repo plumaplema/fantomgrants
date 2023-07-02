@@ -167,7 +167,7 @@ export default function ApprovedContract() {
                             _hover={{ bg: 'blue.500' }}
                             type="submit"
                         >
-                            Approve Contract Spender
+                            Next Step
                         </Button>
                     </Stack>
                 </Stack>

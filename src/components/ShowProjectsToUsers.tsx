@@ -55,7 +55,7 @@ export default function ShowProjectsToUsers({
                                     <Table size="lg">
                                         <Thead>
                                             <Tr >
-                                                <Th fontSize={'xs'}>Project Title</Th>
+                                                <Th fontSize={'xs'}>Proposal Title</Th>
                                                 <Th fontSize={'xs'}>Pool Shares</Th>
                                                 <Th fontSize={'xs'}>Pool Shares Rate</Th>
                                             </Tr>

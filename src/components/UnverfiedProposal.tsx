@@ -2,6 +2,7 @@ import { Tr, Td, Button, useToast } from '@chakra-ui/react'
 import { Projects } from '@prisma/client'
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction } from 'wagmi'
 import { abi, contract_address } from './Helpers/contract'
+import Link from 'next/link'
 
 function UnverfiedProposal({ project, refetch }: { project: Projects, refetch: () => void }) {
     const { id, eventsId, projectTitle } = project
@@ -57,7 +58,13 @@ function UnverfiedProposal({ project, refetch }: { project: Projects, refetch: (
     })
     return (
         <Tr>
-            <Td fontSize="sm">{projectTitle}</Td>
+            <Td color={'blue.500'} fontWeight={'bold'} _hover={{
+                color: 'blue.200'
+            }} fontSize="sm">
+                <Link href={`/projects/unverified/${id}`}>
+                    {projectTitle}
+                </Link>
+            </Td>
             <Td>
                 <Button onClick={async () => {
                     try {

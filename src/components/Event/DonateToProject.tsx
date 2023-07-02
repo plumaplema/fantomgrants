@@ -103,7 +103,14 @@ export default function DonateToProject({ isOpen, onClose, res, refetch, project
             refetch()
             projectMatchrefetch()
             onClose()
-        }
+        },
+        onError(err) {
+            toast({
+                title: err.name,
+                description: err.message,
+                status: 'error'
+            })
+        },
 
     })
 
@@ -164,8 +171,9 @@ export default function DonateToProject({ isOpen, onClose, res, refetch, project
                                         Goes to Project :&nbsp;
                                     </Text>
                                     <Text noOfLines={1} display={'inline'} fontSize={'xs'}>
-                                        {(parseFloat(amount) * tax / 10000).toFixed(4)} FTM
+                                        {(parseFloat(amount) - (parseFloat(amount) * tax / 10000)).toFixed(4)} FTM
                                     </Text>
+
                                 </ListItem>
                                 <ListItem>
                                     <ListIcon as={AiOutlineCheck} />
@@ -173,7 +181,7 @@ export default function DonateToProject({ isOpen, onClose, res, refetch, project
                                         Goes to Public Pool :&nbsp;
                                     </Text>
                                     <Text noOfLines={1} display={'inline'} fontSize={'xs'}>
-                                        {(parseFloat(amount) - (parseFloat(amount) * tax / 10000)).toFixed(4)} FTM
+                                        {(parseFloat(amount) * tax / 10000).toFixed(4)} FTM
                                     </Text>
                                 </ListItem>
                             </List>

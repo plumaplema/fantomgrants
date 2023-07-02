@@ -143,13 +143,27 @@ export default function MyEvents({ value }: { value: Events }) {
                     justifySelf="flex-end"
                     alignItems="center"
                 >
-                    {(!eventData.distibuted && expired) && <Label onClick={async () => {
+                    <Label onClick={async () => {
+                        if (eventData.distibuted) {
+                            toast({
+                                title: "Already Distributed",
+                                status: "info"
+                            })
+                            return
+                        }
+                        if (!expired) {
+                            toast({
+                                title: "Event is not yet ended",
+                                status: "info"
+                            })
+                            return
+                        }
                         try {
                             await writeAsync?.()
                         } catch (error) {
 
                         }
-                    }} label={"Distribute"} />}
+                    }} label={"Distribute"} />
                     <Link
                         href={`/events/${id}`}>
                         <Label label={"View"} />
