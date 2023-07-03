@@ -1,4 +1,4 @@
-import { Button, List, ListIcon, ListItem, SimpleGrid, Stack, VStack, chakra, Text, useDisclosure } from '@chakra-ui/react';
+import { Button, List, ListIcon, ListItem, SimpleGrid, Stack, VStack, chakra, Text, useDisclosure, useToast } from '@chakra-ui/react';
 import { Projects } from '@prisma/client';
 import { AiOutlineCheckSquare } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
@@ -21,6 +21,8 @@ interface Res {
 
 function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, projectData: Res, refetch: () => void }) {
     const projectDonate = useDisclosure()
+
+    const toast = useToast()
 
     const [data_, setData] = useState<{ projectFund: number, eventFund: number }>({ eventFund: 0, projectFund: 0 })
 
@@ -117,6 +119,12 @@ function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, proj
                     rounded="md"
                     leftIcon={<FaRegComment />}
                     lineHeight={1}
+                    onClick={() => {
+                        toast({
+                            title: "Comming Soon",
+                            status: 'info'
+                        })
+                    }}
                     bg="blue.400"
                     _hover={{ bg: 'blue.600' }}
                 >
@@ -147,6 +155,12 @@ function ProjectInfo({ res, projectData, refetch }: { res: Projects | null, proj
                     rounded="md"
                     colorScheme="blue"
                     variant="outline"
+                    onClick={() => {
+                        toast({
+                            title: "Comming Soon",
+                            status: 'info'
+                        })
+                    }}
                 >
                     Donation History
                 </Button>

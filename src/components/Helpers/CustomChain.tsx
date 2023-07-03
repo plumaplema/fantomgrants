@@ -1,8 +1,8 @@
 import { Chain } from "wagmi";
 
 export const FantomFork: Chain = {
-    id: 4002,
-    name: 'Fantom Testnet',
+    id: 250,
+    name: 'Fantom Opera',
     network: 'Fantom Fork',
     nativeCurrency: {
         decimals: 18,
@@ -11,14 +11,14 @@ export const FantomFork: Chain = {
     },
     rpcUrls:
     {
-        public: { http: ['https://rpc.testnet.fantom.network/'] },
+        public: { http: ['https://rpc.ankr.com/fantom/'] },
         default: {
-            http: ['https://rpc.testnet.fantom.network/']
+            http: ['https://rpc.ankr.com/fantom/']
         },
     },
     blockExplorers: {
-        etherscan: { name: 'Fantom', url: ' https://explorer.buildbear.io/occupational-tion-medon-4988a12b' },
-        default: { name: 'Fantom', url: ' https://explorer.buildbear.io/occupational-tion-medon-4988a12b' },
+        etherscan: { name: 'Fantom', url: 'https://ftmscan.com/' },
+        default: { name: 'Fantom', url: ' https://ftmscan.com/' },
     },
 }
 

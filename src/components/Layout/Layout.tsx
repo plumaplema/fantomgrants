@@ -19,7 +19,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     const { chain } = useNetwork()
     const { disconnectAsync } = useDisconnect()
 
-    const incorrectChain = chain?.id != 4002
+    const incorrectChain = chain?.id != 250
 
     const islogged = isConnected && chain
 

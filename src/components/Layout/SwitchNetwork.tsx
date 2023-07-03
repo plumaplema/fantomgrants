@@ -4,7 +4,7 @@ import { useSwitchNetwork } from 'wagmi';
 export default function SwitchNetwork() {
     const toast = useToast()
     const { switchNetworkAsync } = useSwitchNetwork({
-        chainId: 9305,
+        chainId: 250,
         onSuccess(data, variables, context) {
             toast({
                 status: 'success',
